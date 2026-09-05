@@ -45,7 +45,7 @@ services:
       - cartdb
 
   # Product Catalog Service
-  productservice:
+  productcatalogservice:
     build:
       context: ./src/productcatalogservice
       dockerfile: Dockerfile
@@ -64,7 +64,7 @@ services:
     networks:
       - app-network
     depends_on:
-      - productservice
+      - productcatalogservice
     environment:
       - PRODUCT_CATALOG_SERVICE_ADDR=productcatalogservice:3550
 
@@ -78,7 +78,7 @@ services:
     networks:
       - app-network
     depends_on:
-      - productservice
+      - productcatalogservice
       - cartservice
     environment:
       - USE_ALLOYDB=false
@@ -149,7 +149,7 @@ services:
       - emailservice
       - currencyservice
       - paymentservice
-      - productservice
+      - productcatalogservice
     environment:
       - PRODUCT_CATALOG_SERVICE_ADDR=productcatalogservice:3550
       - SHIPPING_SERVICE_ADDR=shippingservice:50051
@@ -169,7 +169,7 @@ services:
       - app-network
     depends_on:
       - checkoutservice
-      - productservice
+      - productcatalogservice
       - cartservice
       - recommendationservice
       - shippingservice
