@@ -31,9 +31,7 @@ COPY package*.json ./
 
 RUN npm install --only=production --no-audit --no-fund
 
-FROM --platform=$BUILDPLATFORM alpine:3.24.1
-
-RUN apk add --no-cache nodejs
+FROM --platform=$BUILDPLATFORM node:20.20.2-alpine
 
 WORKDIR /usr/src/app
 
