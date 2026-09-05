@@ -13,11 +13,11 @@
 # limitations under the License.
 
 # Define a default value so it's not empty if the builder fails to provide it
-ARG BUILDPLATFORM=linux/amd64
+# ARG BUILDPLATFORM=linux/amd64
 
-FROM --platform=$BUILDPLATFORM python:3.14.7-slim@sha256:ce40764625a4ff50df3548277632e7f96c4e77fe75fa848aae9885476e7df5a4 AS base
+FROM --platform=$BUILDPLATFORM python:3.14.7-slim AS base
 
-FROM --platform=$BUILDPLATFORM python:3.14.7-slim@sha256:ce40764625a4ff50df3548277632e7f96c4e77fe75fa848aae9885476e7df5a4 AS builder
+FROM --platform=$BUILDPLATFORM python:3.14.7-slim AS builder
 
 RUN apt-get -qq update \
     && apt-get install -y --no-install-recommends g++ \
@@ -27,7 +27,7 @@ RUN apt-get -qq update \
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-FROM --platform=$BUILDPLATFORM python:3.14.7-slim@sha256:ce40764625a4ff50df3548277632e7f96c4e77fe75fa848aae9885476e7df5a4
+FROM --platform=$BUILDPLATFORM python:3.14.7-slim
 # Enable unbuffered logging
 ENV PYTHONUNBUFFERED=1
 

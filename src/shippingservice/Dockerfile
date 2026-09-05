@@ -13,11 +13,11 @@
 # limitations under the License.
 
 # Define a default value so it's not empty if the builder fails to provide it
-ARG BUILDPLATFORM=linux/amd64
+# ARG BUILDPLATFORM=linux/amd64
 
-FROM --platform=$BUILDPLATFORM golang:1.27.0-alpine@sha256:4c9fe60190a2a3350ddc51de80d0224b8a6698d12bdfc999fee45ea9d6c46dbc AS builder
+FROM --platform=$BUILDPLATFORM golang:1.27.0-alpine AS builder
 ARG TARGETOS=linux
-ARG TARGETARCH=amd64
+ARG TARGETARCH
 WORKDIR /src
 
 # restore dependencies first for better caching
