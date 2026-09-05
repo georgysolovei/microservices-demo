@@ -13,6 +13,16 @@
 # limitations under the License.
 
 services:
+  # Ad Service
+  adservice:
+    build:
+      context: ./src/adservice
+      dockerfile: Dockerfile
+    ports:
+      - "9555:9555"
+    networks:
+      - app-network
+
   # Cart Database (Redis)
   cartdb:
     image: redis:alpine
@@ -55,6 +65,8 @@ services:
       - app-network
     depends_on:
       - productservice
+    environment:
+      - PRODUCT_CATALOG_SERVICE_ADDR=productcatalogservice:3550
 
   # Shopping Assistant Service
   shoppingassistantservice:
@@ -127,6 +139,13 @@ services:
       - currencyservice
       - paymentservice
       - productservice
+    environment:
+      - PRODUCT_CATALOG_SERVICE_ADDR=productcatalogservice:3550
+      - SHIPPING_SERVICE_ADDR=shippingservice:50051
+      - PAYMENT_SERVICE_ADDR=paymentservice:50051
+      - EMAIL_SERVICE_ADDR=emailservice:5000
+      - CURRENCY_SERVICE_ADDR=currencyservice:7000
+      - CART_SERVICE_ADDR=cartservice:7070
 
   # Frontend - Web interface
   frontend:
@@ -145,6 +164,15 @@ services:
       - shippingservice
       - currencyservice
       - paymentservice
+    environment:
+      - PRODUCT_CATALOG_SERVICE_ADDR=productcatalogservice:3550
+      - CURRENCY_SERVICE_ADDR=currencyservice:7000
+      - CART_SERVICE_ADDR=cartservice:7070
+      - RECOMMENDATION_SERVICE_ADDR=recommendationservice:8080
+      - CHECKOUT_SERVICE_ADDR=checkoutservice:5050
+      - SHIPPING_SERVICE_ADDR=shippingservice:50051
+      - AD_SERVICE_ADDR=adservice:9555
+      - SHOPPING_ASSISTANT_SERVICE_ADDR=shoppingassistantservice:80
 
   # Load Generator (optional - for load testing)
   loadgenerator:
