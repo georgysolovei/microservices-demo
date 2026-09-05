@@ -12,8 +12,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-version: "3.9"
-
 services:
   # Frontend - Web interface
   frontend:
@@ -44,7 +42,6 @@ services:
       - app-network
     depends_on:
       - cartservice
-      - userservice
       - shippingservice
       - emailservice
       - currencyservice
