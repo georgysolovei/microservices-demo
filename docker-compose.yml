@@ -50,7 +50,7 @@ services:
       context: ./src/recommendationservice
       dockerfile: Dockerfile
     ports:
-      - "8080:8080"
+      - "8081:8080"
     networks:
       - app-network
     depends_on:
@@ -62,7 +62,7 @@ services:
       context: ./src/shoppingassistantservice
       dockerfile: Dockerfile
     ports:
-      - "8080:8080"
+      - "8082:8080"
     networks:
       - app-network
     depends_on:
@@ -85,7 +85,7 @@ services:
       context: ./src/emailservice
       dockerfile: Dockerfile
     ports:
-      - "8080:8080"
+      - "8083:8080"
     networks:
       - app-network
 
@@ -105,7 +105,7 @@ services:
       context: ./src/paymentservice
       dockerfile: Dockerfile
     ports:
-      - "50051:50051"
+      - "50052:50051"
     networks:
       - app-network
     environment:
