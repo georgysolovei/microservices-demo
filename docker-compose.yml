@@ -80,6 +80,15 @@ services:
     depends_on:
       - productservice
       - cartservice
+    environment:
+      - USE_ALLOYDB=false
+      - PROJECT_ID=online-boutique
+      - REGION=us-central1
+      - ALLOYDB_DATABASE_NAME=products
+      - ALLOYDB_TABLE_NAME=product_embeddings
+      - ALLOYDB_CLUSTER_NAME=online-boutique-cluster
+      - ALLOYDB_INSTANCE_NAME=online-boutique-instance
+      - ALLOYDB_SECRET_NAME=postgres-password
 
   # Currency Service
   currencyservice:
