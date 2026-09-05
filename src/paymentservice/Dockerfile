@@ -41,6 +41,9 @@ COPY --from=builder /usr/src/app/node_modules ./node_modules
 # Copy application with proper permissions
 COPY --chmod=755 . .
 
+# Disable profiler to avoid native module build issues
+ENV DISABLE_PROFILER=1
+
 EXPOSE 50051
 
 ENTRYPOINT [ "node", "index.js" ]
