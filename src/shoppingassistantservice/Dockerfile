@@ -15,9 +15,9 @@
 # Define a default value so it's not empty if the builder fails to provide it
 ARG BUILDPLATFORM
 
-FROM --platform=$BUILDPLATFORM python:3.14.7-slim AS base
+FROM --platform=$BUILDPLATFORM python:3.12-slim AS base
 
-FROM --platform=$BUILDPLATFORM python:3.14.7-slim AS builder
+FROM --platform=$BUILDPLATFORM python:3.12-slim AS builder
 
 RUN apt-get -qq update \
     && apt-get install -y --no-install-recommends g++ \
@@ -27,7 +27,7 @@ RUN apt-get -qq update \
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-FROM --platform=$BUILDPLATFORM python:3.14.7-slim
+FROM --platform=$BUILDPLATFORM python:3.12-slim
 # Enable unbuffered logging
 ENV PYTHONUNBUFFERED=1
 
@@ -35,7 +35,7 @@ ENV PYTHONUNBUFFERED=1
 WORKDIR /shoppingassistantservice
 
 # Grab only the installed packages from builder
-COPY --from=builder /usr/local/lib/python3.14/site-packages/ /usr/local/lib/python3.14/site-packages/
+COPY --from=builder /usr/local/lib/python3.12/site-packages/ /usr/local/lib/python3.12/site-packages/
 COPY --from=builder /usr/local/bin/ /usr/local/bin/
 
 # Add the application with proper permissions
