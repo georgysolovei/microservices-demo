@@ -13,7 +13,7 @@
 # limitations under the License.
 
 # Define a default value so it's not empty if the builder fails to provide it
-# ARG BUILDPLATFORM=linux/amd64
+ARG BUILDPLATFORM
 
 FROM --platform=$BUILDPLATFORM eclipse-temurin:25.0.4_7-jdk-noble AS builder
 
@@ -23,12 +23,12 @@ WORKDIR /app
 COPY ["build.gradle", "gradlew", "./"]
 COPY gradle gradle
 RUN chmod +x gradlew && \
-    ./gradlew downloadRepos
+    bash gradlew downloadRepos
 
 # Copy source and build
 COPY . .
 RUN chmod +x gradlew && \
-    ./gradlew installDist
+    bash gradlew installDist
 
 FROM --platform=$BUILDPLATFORM eclipse-temurin:25.0.4_7-jre-alpine
 

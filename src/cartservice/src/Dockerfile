@@ -13,7 +13,7 @@
 # limitations under the License.
 
 # Define a default value so it's not empty if the builder fails to provide it
-#ARG BUILDPLATFORM=linux/amd64
+ARG BUILDPLATFORM
 
 # https://mcr.microsoft.com/product/dotnet/sdk
 FROM --platform=$BUILDPLATFORM mcr.microsoft.com/dotnet/sdk:10.0.100-noble AS builder

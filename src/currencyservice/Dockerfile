@@ -13,7 +13,7 @@
 # limitations under the License.
 
 # Define a default value so it's not empty if the builder fails to provide it
-# ARG BUILDPLATFORM=linux/amd64
+ARG BUILDPLATFORM
 
 FROM --platform=$BUILDPLATFORM node:20.20.2-alpine AS builder
 
