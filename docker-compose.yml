@@ -90,6 +90,8 @@ services:
       - "7000:7000"
     networks:
       - app-network
+    environment:
+      - PORT=7000
 
   # Email Service
   emailservice:
